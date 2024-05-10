@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 
 
-
+#my secrets & uncommit
 client/notes.txt
+.env
