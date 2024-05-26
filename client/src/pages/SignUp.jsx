@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
-  const [loadng, setLoding] = useState(false);
+  const [loading, setLoding] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e)=>{
@@ -66,9 +66,9 @@ export default function SignUp() {
             <Label value="Your password" />
             <TextInput type='password' placeholder='Password' id='password' onChange={handleChange}/>
             </div>
-            <Button gradientDuoTone='purpleToPink' type='submit' disabled={loadng}>
+            <Button gradientDuoTone='purpleToPink' type='submit' disabled={loading}>
               {
-                loadng ? (
+                loading ? (
                   <>
                     <Spinner size='sm'/>
                     <span className='pl-3'>Loading...</span>
