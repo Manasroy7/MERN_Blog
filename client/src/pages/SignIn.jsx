@@ -31,7 +31,7 @@ export default function SignIn() {
       }
       setLoding(false);
       if(res.ok){
-        navigate('/')  //to redirect sign-in page
+        navigate('/')  //to redirect home page
       }
     } catch (error) {
       setErrorMessage(data.message);
