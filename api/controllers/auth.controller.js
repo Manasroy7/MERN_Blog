@@ -47,7 +47,7 @@ export const signin = async (req, res, next) =>{
         //add cokiee
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, {expiresIn: '3d'});
 
-        const { password: pass, ...rest } = validUser._doc;
+        const { password: pass, ...rest } = validUser._doc;  //// remove the password from the form/web page
 
         res.status(200)
         .cookie('access_token', token, {
