@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import userRouters from './routes/user.route.js';
 import authRouters from './routes/auth.route.js';
 
-dotenv.config()
+dotenv.config() ///for access the dotenv file data
 
 mongoose
 .connect(process.env.MONGO_URL).then(

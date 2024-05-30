@@ -57,4 +57,46 @@ export const signin = async (req, res, next) =>{
     } catch (error) {
         next(error)
     }
-}
+};
+
+export const google = async (req, res, next) => {
+    const { email, name, googlePhotoUrl } = req.body;
+    console.log(email);
+    console.log(name);
+    console.log(googlePhotoUrl);
+    try {
+        const user = await User.findOne({ email });
+        if (user) {
+            //add cokiee
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const { password, ...rest } = user._doc;  //// remove the password from the form/web page
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json(rest);
+        } else {
+            const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+            const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+            const newUser = new User({
+                //Manas Roy = manasroy4565
+                username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
+                email,
+                password: hashedPassword,
+                profilePicture: googlePhotoUrl
+            });
+            await newUser.save();
+            const token = jwt.sign(
+              { id: newUser._id },
+              process.env.JWT_SECRET
+            );
+            const { password, ...rest } = newUser._doc;
+            res
+              .status(200)
+              .cookie('access_token', token, {
+                httpOnly: true,
+              })
+              .json(rest);
+        }
+    } catch (error) {
+        next(error)
+    }
+};
