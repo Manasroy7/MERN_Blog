@@ -27,9 +27,4 @@ dist-ssr
 #my secrets & uncommit
 client/notes.txt
 .env
-
-
-to start client/api
-``
-npm run dev
-```
+notes.txt
